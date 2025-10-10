@@ -1,0 +1,32 @@
+# Ignore the git repository itself
+.git/
+.gitignore
+
+# Ignore the virtual environment
+venv/
+.venv/
+
+# Ignore Python's cache and compiled files
+__pycache__/
+*.pyc
+
+# Ignore testing caches and reports
+.pytest_cache/
+.hypothesis/
+.coverage
+htmlcov/
+
+# Ignore IDE and editor directories
+.vscode/
+.idea/
+
+# Ignore local environment variables
+.env
+*.env
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Documentation is not needed inside the final container
+README.md
