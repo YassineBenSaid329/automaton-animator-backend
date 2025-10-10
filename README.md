@@ -140,7 +140,7 @@ Converts a regular expression string into an NFA data structure.
     "transitions": [ ["q0", "a", "q6"], ... ],
     "start_state": "q0",
     "final_states": ["q1"]
-}```
+}
 
 **❌ 400 Bad Request: Client Error Response**
 ```json
