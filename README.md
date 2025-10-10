@@ -135,12 +135,12 @@ Converts a regular expression string into an NFA data structure.
 **✅ 200 OK: Success Response**
 ```json
 {
-    "states": ["q0", ...],
+    "states": ["q0"],
     "alphabet": ["a", "b", "c"],
-    "transitions": [ ["q0", "a", "q6"], ... ],
+    "transitions": [ ["q0", "a", "q6"]],
     "start_state": "q0",
     "final_states": ["q1"]
-}```
+}
 
 **❌ 400 Bad Request: Client Error Response**
 ```json
