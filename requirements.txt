@@ -2,6 +2,7 @@ attrs==25.4.0
 blinker==1.9.0
 click==8.3.0
 Flask==3.1.2
+gunicorn==23.0.0
 hypothesis==6.140.3
 iniconfig==2.1.0
 itsdangerous==2.2.0
