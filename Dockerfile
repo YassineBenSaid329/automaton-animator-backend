@@ -12,9 +12,9 @@ LABEL description="Backend service for the Automaton Animator project."
 WORKDIR /app
 
 # Prevents Python from writing .pyc files to disc.
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONDONTWRITEBYTECODE = 1
 # Ensures Python output is sent straight to the terminal without buffering.
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED = 1
 
 # --- Dependency Installation ---
 # Copy only the requirements file first to leverage Docker's layer caching.

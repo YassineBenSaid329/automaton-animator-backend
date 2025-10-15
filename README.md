@@ -11,22 +11,40 @@ The engine is built on a foundation of clean architecture, strict validation, an
 
 ---
 
-## 🏛️ Core Architecture
+## 🏛️ Core Architecture: A Three-Pass Compiler
 
-The backend is a decoupled, stateless REST API built with Flask. Its sole responsibility is to execute automata-related logic and serve the results in a JSON format. This design adheres to the **Separation of Concerns** principle:
+The backend is a decoupled REST API built with Flask. The core logic implements a professional, **three-pass compiler architecture** that ensures a perfect Separation of Concerns. This design is highly robust, scalable, and maintainable.
 
-*   `app.py` **(Web Layer)**: Manages HTTP protocols and JSON serialization.
-*   `automata_logic.py` **(Logic Layer)**: Implements the core conversion algorithms.
+```mermaid
+graph TD
+    A["Input String<br>'a(b|c)*'"] --> B{"Stage 1: Tokenizer<br>(Lexical Analysis)"};
+    B -- "Stream of Tokens" --> D{"Stage 2: Parser<br>(Syntactic Analysis)"};
+    D -- "Abstract Syntax Tree (AST)" --> E{"Stage 3: NFA Builder<br>(Semantic Action)"};
+    E --> F["✅ Final NFA"];
 
----
+  
 
-## ✨ Features
+    The Tokenizer: Acts as a strict gatekeeper, converting the raw input string into a categorized stream of tokens and handling implicit concatenation.
 
-*   **Regex to NFA Conversion**: Implements Thompson's Construction algorithm to handle concatenation (`ab`), union (`a|b`), Kleene star (`a*`), and grouping (`()`).
-*   **Strict Input Validation**: A two-stage processing pipeline (Tokenizer and Parser) ensures that only syntactically valid regular expressions are processed.
-*   **Certified Reliability**: The engine's correctness is guaranteed by a multi-layered automated testing suite using **pytest** and **Hypothesis**.
+    The Parser: Acts as a grammarian, validating the token stream's syntax. Its sole output is an Abstract Syntax Tree (AST), a tree that perfectly represents the expression's logic and precedence.
 
----
+    The NFA Builder: Acts as the final constructor. It recursively "walks" the validated AST to build the final NFA.
+
+This design separates the "what" (the AST) from the "how" (the NFA), which makes the system incredibly scalable for future features.
+
+✨ Features
+
+    Advanced Regex to NFA Conversion: Implements Thompson's Construction algorithm via a robust AST walker, correctly handling concatenation (ab), union (a|b), Kleene star (a*), and parenthesis scope (()).
+
+    Compiler-Grade Input Validation: The multi-pass architecture provides rigorous validation at each stage, catching invalid characters in the tokenizer and complex grammatical errors (e.g., *a, a|b|) in the parser, providing clear and specific error messages.
+
+    Certified Reliability: The engine's correctness and robustness are guaranteed by a methodical, multi-layered testing suite that includes:
+
+        Unit Tests for each component (Tokenizer, Parser, Builder).
+
+        End-to-End API Integration Tests.
+
+        Property-Based Fuzz Testing with Hypothesis to harden against unexpected failures.
 
 ## 🚀 Running the Application
 
