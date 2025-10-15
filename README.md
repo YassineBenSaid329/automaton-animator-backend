@@ -10,7 +10,6 @@ This repository contains the backend service for the Automaton Animator project.
 The engine is built on a foundation of clean architecture, strict validation, and comprehensive automated testing to ensure correctness and stability.
 
 ---
-
 ## 🏛️ Core Architecture: A Three-Pass Compiler
 
 The backend is a decoupled REST API built with Flask. The core logic implements a professional, **three-pass compiler architecture** that ensures a perfect Separation of Concerns. This design is highly robust, scalable, and maintainable.
@@ -21,30 +20,31 @@ graph TD
     B -- "Stream of Tokens" --> D{"Stage 2: Parser<br>(Syntactic Analysis)"};
     D -- "Abstract Syntax Tree (AST)" --> E{"Stage 3: NFA Builder<br>(Semantic Action)"};
     E --> F["✅ Final NFA"];
+```
 
-  
+The Tokenizer: Acts as a strict gatekeeper, converting the raw input string into a categorized stream of tokens and handling implicit concatenation.
 
-    The Tokenizer: Acts as a strict gatekeeper, converting the raw input string into a categorized stream of tokens and handling implicit concatenation.
+The Parser: Acts as a grammarian, validating the token stream's syntax. Its sole output is an Abstract Syntax Tree (AST), a tree that perfectly represents the expression's logic and precedence.
 
-    The Parser: Acts as a grammarian, validating the token stream's syntax. Its sole output is an Abstract Syntax Tree (AST), a tree that perfectly represents the expression's logic and precedence.
-
-    The NFA Builder: Acts as the final constructor. It recursively "walks" the validated AST to build the final NFA.
+The NFA Builder: Acts as the final constructor. It recursively "walks" the validated AST to build the final NFA.
 
 This design separates the "what" (the AST) from the "how" (the NFA), which makes the system incredibly scalable for future features.
 
-✨ Features
 
-    Advanced Regex to NFA Conversion: Implements Thompson's Construction algorithm via a robust AST walker, correctly handling concatenation (ab), union (a|b), Kleene star (a*), and parenthesis scope (()).
 
-    Compiler-Grade Input Validation: The multi-pass architecture provides rigorous validation at each stage, catching invalid characters in the tokenizer and complex grammatical errors (e.g., *a, a|b|) in the parser, providing clear and specific error messages.
+## ✨ Features
 
-    Certified Reliability: The engine's correctness and robustness are guaranteed by a methodical, multi-layered testing suite that includes:
+Advanced Regex to NFA Conversion: Implements Thompson's Construction algorithm via a robust AST walker, correctly handling concatenation (ab), union (a|b), Kleene star (a*), and parenthesis scope (()).
 
-        Unit Tests for each component (Tokenizer, Parser, Builder).
+Compiler-Grade Input Validation: The multi-pass architecture provides rigorous validation at each stage, catching invalid characters in the tokenizer and complex grammatical errors (e.g., *a, a|b|) in the parser, providing clear and specific error messages.
 
-        End-to-End API Integration Tests.
+Certified Reliability: The engine's correctness and robustness are guaranteed by a methodical, multi-layered testing suite that includes:
 
-        Property-Based Fuzz Testing with Hypothesis to harden against unexpected failures.
+    Unit Tests for each component (Tokenizer, Parser, Builder).
+
+    End-to-End API Integration Tests.
+
+    Property-Based Fuzz Testing with Hypothesis to harden against unexpected failures.
 
 ## 🚀 Running the Application
 
